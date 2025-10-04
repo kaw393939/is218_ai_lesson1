@@ -10,75 +10,28 @@ from config import TypedConfig
 from logger import get_logger, setup_logging
 
 
-# Pricing per 1M tokens (as of January 2025)
-# Source: OpenAI Pricing Page
+# Pricing per 1M tokens (as of 2024/2025)
+# Source: https://openai.com/api/pricing/
 MODEL_PRICING = {
-    # Latest models (recommended for most use cases)
-    'gpt-4o': {
-        'input': 2.50,    # $2.50 per 1M tokens
-        'output': 10.00,  # $10.00 per 1M tokens
-        'cached_input': 1.25,  # $1.25 per 1M cached tokens
-    },
     'gpt-4o-mini': {
         'input': 0.15,    # $0.15 per 1M tokens
         'output': 0.60,   # $0.60 per 1M tokens
-        'cached_input': 0.075,  # $0.075 per 1M cached tokens
     },
-    
-    # GPT-5 series (newest, most capable)
-    'gpt-5': {
-        'input': 1.25,
-        'output': 10.00,
-        'cached_input': 0.125,
+    'gpt-4o': {
+        'input': 2.50,    # $2.50 per 1M tokens
+        'output': 10.00,  # $10.00 per 1M tokens
     },
-    'gpt-5-mini': {
-        'input': 0.25,
-        'output': 2.00,
-        'cached_input': 0.025,
+    'o1-mini': {
+        'input': 1.10,    # $1.10 per 1M tokens
+        'output': 4.40,   # $4.40 per 1M tokens
     },
-    'gpt-5-nano': {
-        'input': 0.05,
-        'output': 0.40,
-        'cached_input': 0.005,
+    'o1': {
+        'input': 15.00,   # $15.00 per 1M tokens
+        'output': 60.00,  # $60.00 per 1M tokens
     },
-    
-    # GPT-4.1 series
-    'gpt-4.1': {
-        'input': 2.00,
-        'output': 8.00,
-        'cached_input': 0.50,
-    },
-    'gpt-4.1-mini': {
-        'input': 0.40,
-        'output': 1.60,
-        'cached_input': 0.10,
-    },
-    'gpt-4.1-nano': {
-        'input': 0.10,
-        'output': 0.40,
-        'cached_input': 0.025,
-    },
-    
-    # O-series (reasoning models)
-    'o3-mini': {
-        'input': 1.10,
-        'output': 4.40,
-        'cached_input': 0.55,
-    },
-    'o4-mini': {
-        'input': 1.10,
-        'output': 4.40,
-        'cached_input': 0.275,
-    },
-    
-    # Legacy models (for comparison)
-    'gpt-4-turbo': {
-        'input': 10.00,
-        'output': 30.00,
-    },
-    'gpt-3.5-turbo': {
-        'input': 0.50,
-        'output': 1.50,
+    'o1-pro': {
+        'input': 150.00,  # $150.00 per 1M tokens
+        'output': 600.00, # $600.00 per 1M tokens
     },
 }
 
@@ -88,8 +41,8 @@ class ChatConfig(TypedConfig):
 
     @property
     def model(self) -> str:
-        """OpenAI model to use (e.g., gpt-3.5-turbo, gpt-4-turbo)."""
-        return self.get_str('CHAT_MODEL', 'gpt-3.5-turbo')
+        """OpenAI model to use (e.g., gpt-4o-mini, gpt-4o)."""
+        return self.get_str('CHAT_MODEL', 'gpt-4o-mini')
 
     @property
     def max_tokens(self) -> int:
@@ -137,7 +90,7 @@ class ChatConfig(TypedConfig):
         return self.get_str('CHAT_LOG_FILE', 'chat.log')
 
 
-def count_tokens(text: str, model: str = "gpt-3.5-turbo") -> int:
+def count_tokens(text: str, model: str = "gpt-4o-mini") -> int:
     """Count tokens in text for given model.
 
     Args:
