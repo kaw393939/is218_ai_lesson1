@@ -5,6 +5,7 @@ consistent configuration across the application.
 """
 import json
 import logging
+import re
 import uuid
 from contextlib import contextmanager
 from logging import LoggerAdapter
@@ -271,3 +272,171 @@ def log_context(logger: logging.Logger, **context):
     finally:
         # Log exit
         context_logger.debug('Exiting context')
+
+
+class SensitiveDataFilter(logging.Filter):
+    """Filter that redacts sensitive information from log messages."""
+
+    # Patterns for sensitive data
+    PATTERNS = {
+        'credit_card': (r'\b\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}\b', '[REDACTED-CC]'),
+        'ssn': (r'\b\d{3}-\d{2}-\d{4}\b', '[REDACTED-SSN]'),
+        'email': (r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', '[REDACTED-EMAIL]'),
+        'api_key': (r'(api[_-]?key[=:]\s*)([^\s&,}]+)', r'\1[REDACTED-KEY]'),
+        'password': (r'(password[=:]\s*)([^\s&,}]+)', r'\1[REDACTED-PWD]'),
+    }
+
+    def filter(self, record):
+        """Redact sensitive data from the log record.
+
+        Args:
+            record: Log record to filter
+
+        Returns:
+            Always returns True to allow the record through
+        """
+        record.msg = self.redact(str(record.msg))
+        # Also redact from args if they exist
+        if record.args:
+            if isinstance(record.args, dict):  # pragma: no cover
+                # Handle dict args (for %(name)s style formatting)  # pragma: no cover
+                record.args = {  # pragma: no cover
+                    k: self.redact(str(v)) for k, v in record.args.items()
+                }
+            elif isinstance(record.args, tuple):
+                # Handle tuple args (for %s style formatting)
+                record.args = tuple(self.redact(str(arg)) for arg in record.args)
+        return True
+
+    def redact(self, text):
+        """Apply all redaction patterns to text.
+
+        Args:
+            text: Text to redact
+
+        Returns:
+            Text with sensitive data redacted
+        """
+        for pattern, replacement in self.PATTERNS.values():
+            text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+        return text
+
+
+def get_secure_logger(name, level=logging.INFO):
+    """Get a logger with sensitive data filtering enabled.
+
+    Args:
+        name: Name for the logger
+        level: Logging level (default: INFO)
+
+    Returns:
+        Logger with SensitiveDataFilter attached
+
+    Example:
+        logger = get_secure_logger(__name__)
+        logger.info('User password=secret123')  # password is redacted
+    """
+    logger = logging.getLogger(name)
+    logger.setLevel(level)
+
+    # Add the filter
+    sensitive_filter = SensitiveDataFilter()
+    logger.addFilter(sensitive_filter)
+
+    # Add a console handler if none exists
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        handler.setFormatter(logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        ))
+        logger.addHandler(handler)
+
+    return logger
+
+
+def sanitize_dict(data, sensitive_keys=None):
+    """Sanitize a dictionary by redacting sensitive keys.
+
+    Args:
+        data: Dictionary to sanitize
+        sensitive_keys: Set of keys to redact (case-insensitive)
+
+    Returns:
+        New dictionary with sensitive values redacted
+
+    Example:
+        user_data = {'username': 'alice', 'password': 'secret'}
+        safe_data = sanitize_dict(user_data)
+        # safe_data = {'username': 'alice', 'password': '[REDACTED]'}
+    """
+    if sensitive_keys is None:
+        sensitive_keys = {
+            'password', 'pwd', 'passwd',
+            'api_key', 'apikey', 'api-key',
+            'secret', 'token', 'auth',
+            'credit_card', 'cc', 'card_number',
+            'ssn', 'social_security',
+        }
+
+    # Convert to lowercase for comparison
+    sensitive_keys_lower = {k.lower() for k in sensitive_keys}
+
+    sanitized = {}
+    for key, value in data.items():
+        if key.lower() in sensitive_keys_lower:
+            sanitized[key] = '[REDACTED]'
+        elif isinstance(value, dict):
+            # Recursively sanitize nested dicts
+            sanitized[key] = sanitize_dict(value, sensitive_keys)
+        else:
+            sanitized[key] = value
+
+    return sanitized
+
+
+def mask_credit_card(card_number):
+    """Mask all but the last 4 digits of a credit card.
+
+    Args:
+        card_number: Credit card number as string
+
+    Returns:
+        Masked credit card like '****1234'
+
+    Example:
+        masked = mask_credit_card('4532-1234-5678-9010')
+        # masked = '****9010'
+    """
+    # Remove spaces and dashes
+    digits = ''.join(c for c in str(card_number) if c.isdigit())
+
+    if len(digits) < 4:
+        return '[INVALID-CC]'
+
+    return '****' + digits[-4:]
+
+
+def mask_email(email):
+    """Mask email address but preserve domain.
+
+    Args:
+        email: Email address as string
+
+    Returns:
+        Masked email like 'j***@example.com'
+
+    Example:
+        masked = mask_email('john.doe@example.com')
+        # masked = 'j***@example.com'
+    """
+    if '@' not in email:
+        return '[INVALID-EMAIL]'
+
+    local, domain = email.split('@', 1)
+
+    if len(local) <= 1:
+        masked_local = '*'
+    else:
+        masked_local = local[0] + '***'
+
+    return f"{masked_local}@{domain}"
