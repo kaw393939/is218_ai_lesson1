@@ -1,100 +1,117 @@
-# TinyTools Calculator – In-Class Test (30 min)
+# 🚀 Build Your AI Chat Assistant
 
-## Scenario
-You’ve joined **TinyTools, Inc.** Deliver a production-ready **Python Calculator** library with four operations:
+> **You just finished the calculator test. Now let's build something awesome!**
 
-- **add**, **subtract**, **multiply**, **divide**  
-- **Divide by zero must raise `ZeroDivisionError`.**
+## 🎯 What You're Building
 
-Your team enforces professional workflow:  
-- **Brand-new repo**  
-- **Atomic commits** with required prefixes  
-- Pass **linting**  
-- All **tests** must pass  
-- **100% test coverage** required  
+A **working AI chatbot** powered by OpenAI:
+- 💬 Chat with AI models
+- 📝 Save conversation history
+- 🔒 Keep API keys secure
+- 📊 Track costs
+- ✅ 100% test coverage
+
+**Time**: ~20 hours | **Format**: 17 hands-on lessons
 
 ---
 
-## Required Repo Layout
+## ⚡ Quick Start (Do This Now!)
+
+### Step 1: Verify Your Setup
+```bash
+python --version  # Should be 3.8+
+pip install -r requirements.txt
+PYTHONPATH=src pytest tests/test_calculator.py -v  # Should pass ✅
 ```
 
-README.md
-requirements.txt
-src/
-tests/
-
-````
-
----
-
-## Commit Rules
-- Every commit message **must** start with one of:  
-  - `chore:` — setup/config/docs  
-  - `feature:` — new functionality **and its tests**  
-  - `fix:` — bug fix or correcting a test  
-
-- **Atomic history**:
-  - Each calculator function (**add, subtract, multiply, divide**) must be delivered in **its own commit**, with the tests **and** the implementation together.  
-  - Do **not** put multiple functions in one commit.  
-  - Do **not** split one function across multiple commits.
-
-- **Minimum 8 commits** required (more is fine; do not squash).
-
-### Example Commit Timeline
-1. `chore: initialize repo with README and requirements`
-2. `chore: add project skeleton (src, tests) and setup notes`
-3. `chore: document how to run lint/tests in README`
-4. `feature: implement add() with unit tests`
-5. `feature: implement subtract() with unit tests`
-6. `feature: implement multiply() with unit tests`
-7. `feature: implement divide() with unit tests including divide-by-zero`
-8. `chore: add coverage command and enforce 100% in README`
-9. *(if needed)* `fix: correct edge case in subtract() test`
-10. *(if needed)* `fix: address pylint error in calculator module`
-
----
-
-## Local Commands (before pushing)
+### Step 2: Start Lesson 1
 ```bash
-# Install dependencies
+# Run the tests (they'll fail - that's expected!)
+PYTHONPATH=src pytest tests/part1_configuration/test_lesson_1_1.py -v
+```
+
+### Step 3: Read & Code
+**👉 [Open Lesson 1.1: Keeping Secrets Safe](./lessons/part1_configuration/lesson_1_1.md)**
+
+Follow the lesson to make all 12 tests pass!
+
+---
+
+## 🎮 How This Works
+
+Each lesson follows the same pattern:
+
+1. **📖 Read** the lesson (learn the concepts)
+2. **❌ Run tests** (see them fail)
+3. **💻 Write code** (make tests pass)
+4. **✅ Tests pass** (you did it!)
+5. **🎯 Commit** (save your work)
+
+**Example:**
+```bash
+# See tests fail
+PYTHONPATH=src pytest tests/part1_configuration/test_lesson_1_1.py -v
+# ❌ 12 failed
+
+# Write your code...
+
+# See tests pass!
+PYTHONPATH=src pytest tests/part1_configuration/test_lesson_1_1.py -v
+# ✅ 12 passed
+
+# Commit
+git commit -m "feature: lesson 1.1 complete"
+```
+
+---
+
+## � Course Roadmap
+
+**Part 1: Configuration** (3 lessons, 2 hrs) - Keep secrets safe  
+**Part 2: Logging** (4 lessons, 3 hrs) - Debug like a pro  
+**Part 3: REPL** (4 lessons, 3 hrs) - Build interactive CLI  
+**Part 4: OpenAI API** (4 lessons, 3 hrs) - Connect to AI  
+**Part 5: Final Project** (4 lessons, 4 hrs) - Your chatbot!
+
+� [View All Lessons](./lessons/INDEX.md)
+
+---
+
+## 📋 Track Your Progress
+
+### Part 1: Configuration ⏳
+- [x] Lesson 1.1: Basic Config (12 tests) ✅
+- [ ] Lesson 1.2: Type-Safe Config (18 tests) 👈 **DO THIS NEXT**
+- [ ] Lesson 1.3: Validation (10 tests)
+
+### Part 2-5: Coming Up!
+See full lesson list: [📖 View All Lessons](./lessons/INDEX.md)
+
+---
+
+## � Need Help?
+
+**Stuck on a test?** Look at the test file - it has hints in the docstrings!
+
+**Tests won't run?** Check:
+```bash
+# Did you set PYTHONPATH?
+PYTHONPATH=src pytest tests/part1_configuration/test_lesson_1_1.py -v
+
+# Did you install requirements?
 pip install -r requirements.txt
+```
 
-# Lint (must be clean)
-pylint --errors-only src
-
-# Run tests
-PYTHONPATH=src pytest tests -v
-PYTHONPATH=src pytest --pylint src -v
-
-# Coverage (must be 100%)
-PYTHONPATH=src coverage run -m pytest tests
-coverage report --fail-under=100
-````
+**Still stuck?** Ask your instructor or classmates!
 
 ---
 
-## How Grading Works
+## 📚 More Information
 
-Your repository is graded entirely by the **GitHub Actions workflow** in `.github/workflows/ci.yml`.
-If any step fails, you lose points for that category.
-
-### Rubric (100 pts total)
-
-| # | CI Job / Step         | Requirement                                                   | Points | Pass                                    | Fail                 |
-| - | --------------------- | ------------------------------------------------------------- | -----: | --------------------------------------- | -------------------- |
-| 1 | **Commit Policy**     | ≥ 8 commits                                                   |     20 | CI shows “Commit count requirement met” | Fewer than 8 commits |
-| 2 | **Commit Policy**     | All commit messages start with `chore:` / `feature:` / `fix:` |     20 | All messages valid                      | Any message invalid  |
-| 3 | **Project Structure** | `README.md`, `requirements.txt`, `src/`, `tests/` present     |     10 | All present                             | Any missing          |
-| 4 | **Lint Check**        | `pylint --errors-only src` clean                              |     15 | No errors                               | Any error            |
-| 5 | **Pytest-Pylint**     | `pytest --pylint src -v` passes                               |      5 | Pass                                    | Fail                 |
-| 6 | **Unit Tests**        | `pytest tests -v` passes                                      |     15 | All tests pass                          | Any fail             |
-| 7 | **Coverage**          | `coverage report --fail-under=100` shows 100%                 |     15 | Exactly 100%                            | < 100%               |
-
-**Total = 100 points**
+- [📖 All Lessons](./lessons/INDEX.md) - Complete lesson catalog
+- [🎯 How This Works](./lessons/TEST_DRIVEN_APPROACH.md) - Test-driven learning explained
+- [📊 Course Design](./lessons/COURSE_DESIGN.md) - Pedagogical approach
 
 ---
 
-## Submission
-
-* Push to GitHub/GitLab and share the repo URL **OR** upload a zip including `.git` history.
-* Your **last commit** must be before the 30-minute deadline.
+**Ready?** → [Start Lesson 1.1 Now](./lessons/part1_configuration/lesson_1_1.md) 🚀
