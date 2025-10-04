@@ -1,6 +1,27 @@
-"""REPL (Read-Eval-Print Loop) for calculator application."""
+"""REPL (Read-Eval-Print Loop) for calculator application    def __init__(self, config: CalculatorConfig | None = None):  # pylint: disable=super-init-not-called
+        """Initialize the calculator REPL.
 
-import uuid
+        Args:
+            config: Optional configuration object. If None, creates default config.
+        """
+        self.running = False
+        self.config = config or CalculatorConfig()
+
+        # Setup logging
+        setup_logging(
+            level=self.config.log_level,
+            log_file=self.config.log_file
+        )
+        self.logger = get_logger(__name__)
+
+        # Session tracking
+        self.session_id = str(uuid.uuid4())[:8]
+        self.operation_count = 0
+
+        self.logger.info(
+            "Calculator session started",
+            extra={'session_id': self.session_id}
+        )port uuid
 from config import TypedConfig
 from logger import get_logger, setup_logging
 
@@ -118,12 +139,6 @@ class CalculatorREPL:
         Args:
             user_input: Raw input from user
         """
-        self.logger.debug(
-            "Processing input: %s",
-            user_input,
-            extra={'session_id': self.session_id}
-        )
-
         # Strip whitespace and split into parts
         parts = user_input.strip().split()
 
@@ -135,13 +150,6 @@ class CalculatorREPL:
 
         # Handle exit
         if command == 'exit':
-            self.logger.info(
-                "Exit command received",
-                extra={
-                    'session_id': self.session_id,
-                    'operations_performed': self.operation_count
-                }
-            )
             print("Goodbye!")
             self.running = False
             return
@@ -156,37 +164,11 @@ class CalculatorREPL:
             result = self.execute_command(command, args)
             print(f"Result: {result}")
         except ValueError as e:
-            self.logger.error(
-                "Invalid command: %s",
-                e,
-                extra={
-                    'session_id': self.session_id,
-                    'command': command,
-                    'cmd_args': args,
-                    'error': str(e)
-                }
-            )
             print(f"Error: {e}")
         except ZeroDivisionError:
-            self.logger.error(
-                "Division by zero attempted",
-                extra={
-                    'session_id': self.session_id,
-                    'command': command,
-                    'cmd_args': args
-                }
-            )
             print("Error: Cannot divide by zero")
         except Exception as e:  # pylint: disable=broad-exception-caught
             # Catch all to prevent REPL from crashing
-            self.logger.error(
-                "Unexpected error: %s",
-                e,
-                extra={
-                    'session_id': self.session_id,
-                    'command': command
-                }
-            )
             print(f"Error: {e}")
 
     def execute_command(self, command: str, args: list) -> float:
@@ -202,16 +184,6 @@ class CalculatorREPL:
         Raises:
             ValueError: If command is invalid or args are wrong
         """
-        self.logger.debug(
-            "Executing command: %s",
-            command,
-            extra={
-                'session_id': self.session_id,
-                'command': command,
-                'cmd_args': args
-            }
-        )
-
         # Normalize command to lowercase
         command = command.lower()
 
@@ -242,33 +214,12 @@ class CalculatorREPL:
 
         # Check max value limit
         if abs(result) > self.config.max_value:
-            self.logger.error(
-                "Result exceeds maximum",
-                extra={
-                    'session_id': self.session_id,
-                    'command': command,
-                    'result': result
-                }
-            )
             raise ValueError(
                 f"Result exceeds maximum value: {self.config.max_value}"
             )
 
         # Format with configured precision
-        result = round(result, self.config.precision)
-
-        self.logger.info(
-            "Calculation completed: %s %s %s = %s",
-            command, num1, num2, result,
-            extra={
-                'session_id': self.session_id,
-                'operation': command,
-                'result': result
-            }
-        )
-
-        self.operation_count += 1
-        return result
+        return round(result, self.config.precision)
 
 
 def main():
