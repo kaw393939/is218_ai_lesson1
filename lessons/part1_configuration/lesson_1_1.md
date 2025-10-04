@@ -2,15 +2,10 @@
 
 > **Part 1 of 4: Configuration Management** | Lesson 1 of 3
 
-### 🧭 Navigation
-🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](lesson_1_2.md)
-
----
-
----
+**⏱️ Time**: 30 minutes | **� Goal**: Make all 12 tests pass! | **� File**: `src/config.py`
 
 ### 🧭 Navigation
-🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 1.2](lesson_1_2.md)
+🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 1.2](lesson_1_2.md)
 
 ---
 
@@ -287,13 +282,24 @@ self.debug_mode = os.getenv('DEBUG_MODE', 'false').lower() == 'true'
 
 Good luck! 🎯
 
+---
+
+### 🧭 Navigation
+🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 1.2](lesson_1_2.md)
+
+---
+
+**Lesson 1.1 Complete!** ✅ When all 12 tests pass, continue to [Lesson 1.2: Type-Safe Configuration →](lesson_1_2.md)
+
+````
+
 
 ````
 
 ---
 
 ### 🧭 Navigation
-🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](lesson_1_2.md)
+🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next](lesson_1_2.md)
 
 ---
 

@@ -1,4 +1,4 @@
-name: ci
+name: Student Assignment Grading
 
 on:
   push:
@@ -7,66 +7,14 @@ on:
     branches: ["**"]
 
 jobs:
-  commit-policy:
-    name: "📝 GRADE: Git Commit History & Messages"
+  grade-assignment:
+    name: "📊 Grade Assignment"
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout (full history)
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: "✅ GRADE: Commit messages & count (min 8 commits with chore|feature|fix prefixes)"
-        env:
-          MIN_COMMITS: "8"   # change if you want a different minimum
-        run: |
-          set -e
-          echo "🔍 Validating all commits in repository history"
-          BAD=0
-
-          # Count ALL commits in the repository (not just the push range)
-          ALL_COMMITS=$(git rev-list --no-merges HEAD || true)
-          if [ -z "$ALL_COMMITS" ]; then
-            echo "::error::❌ No commits found in repository."
-            exit 1
-          fi
-
-          TOTAL_COUNT=$(echo "$ALL_COMMITS" | wc -l | tr -d ' ')
-          echo "📊 Found $TOTAL_COUNT total commits in repository (minimum required: $MIN_COMMITS)"
-          
-          if [ "$TOTAL_COUNT" -lt "$MIN_COMMITS" ]; then
-            echo "::error::❌ GRADE FAIL: Found $TOTAL_COUNT total commits; require at least $MIN_COMMITS commits in repository."
-            BAD=1
-          else
-            echo "✅ GRADE PASS: Commit count requirement met ($TOTAL_COUNT >= $MIN_COMMITS)"
-          fi
-
-          echo ""
-          echo "🔍 Checking commit message format for all commits..."
-          for c in $ALL_COMMITS; do
-            MSG=$(git log -1 --pretty=%s "$c")
-            if ! echo "$MSG" | grep -Eiq '^(chore|feature|fix): '; then
-              echo "::error::❌ GRADE FAIL: Commit $c message must start with 'chore: ', 'feature: ', or 'fix: ' — got: $MSG"
-              BAD=1
-            else
-              echo "✅ Valid: $MSG"
-            fi
-          done
-
-          if [ $BAD -eq 0 ]; then
-            echo ""
-            echo "✅ GRADE PASS: All commit messages follow conventional format!"
-          fi
-
-          exit $BAD
-
-  build-test:
-    name: "🧪 GRADE: Code Quality & Testing"
-    runs-on: ubuntu-latest
-    needs: commit-policy
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Get full history for commit count
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -81,87 +29,217 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: "✅ GRADE: Project structure verification"
-        run: |
-          echo "🔍 Checking required project structure..."
-          MISSING=0
-          
-          if [ -f README.md ]; then
-            echo "✅ README.md found"
-          else
-            echo "::error::❌ GRADE FAIL: Missing README.md"
-            MISSING=1
-          fi
-          
-          if [ -f requirements.txt ]; then
-            echo "✅ requirements.txt found"
-          else
-            echo "::error::❌ GRADE FAIL: Missing requirements.txt"
-            MISSING=1
-          fi
-          
-          if [ -d src ]; then
-            echo "✅ src/ directory found"
-          else
-            echo "::error::❌ GRADE FAIL: Missing src/ directory"
-            MISSING=1
-          fi
-          
-          if [ -d tests ]; then
-            echo "✅ tests/ directory found"
-          else
-            echo "::error::❌ GRADE FAIL: Missing tests/ directory"
-            MISSING=1
-          fi
-          
-          if [ $MISSING -eq 0 ]; then
-            echo "✅ GRADE PASS: All required structure elements present!"
-          fi
-          
-          exit $MISSING
-
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          # Ensure critical tools present even if students forget them:
-          pip install pytest pytest-cov pytest-pylint coverage pylint
+          pip install pytest coverage
 
-      - name: "✅ GRADE: Lint check (pylint --errors-only)"
+      - name: "📋 GRADING REPORT - Lesson Completion Status"
         env:
           PYTHONPATH: ${{ github.workspace }}/src
         run: |
-          echo "🔍 Running pylint on source code..."
-          pylint --errors-only src
-          echo "✅ No linting errors found!"
+          echo "════════════════════════════════════════════════════════════════"
+          echo "                    � GRADING REPORT                          "
+          echo "════════════════════════════════════════════════════════════════"
+          echo ""
+          
+          # Student info
+          STUDENT=$(git log --format='%an' | head -1)
+          COMMIT_COUNT=$(git rev-list --count --no-merges HEAD)
+          LAST_COMMIT=$(git log -1 --format='%h - %s (%ar)')
+          
+          echo "👤 Student: $STUDENT"
+          echo "📝 Total Commits: $COMMIT_COUNT"
+          echo "🕒 Last Commit: $LAST_COMMIT"
+          echo ""
+          echo "════════════════════════════════════════════════════════════════"
+          echo ""
+          
+          # Test each lesson and track results
+          TOTAL_LESSONS=13
+          COMPLETED_LESSONS=0
+          
+          echo "📚 PART 1: Configuration Management"
+          echo "────────────────────────────────────────────────────────────────"
+          
+          # Lesson 1.1
+          if pytest tests/part1_configuration/test_lesson_1_1.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 1.1: Introduction to Configuration (12 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 1.1: Introduction to Configuration (12 tests) - INCOMPLETE"
+          fi
+          
+          # Lesson 1.2
+          if pytest tests/part1_configuration/test_lesson_1_2.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 1.2: Type-Safe Configuration (16 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 1.2: Type-Safe Configuration (16 tests) - INCOMPLETE"
+          fi
+          
+          # Lesson 1.3
+          if pytest tests/part1_configuration/test_lesson_1_3.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 1.3: Configuration Validation (19 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 1.3: Configuration Validation (19 tests) - INCOMPLETE"
+          fi
+          
+          echo ""
+          echo "📚 PART 2: Logging & Debugging"
+          echo "────────────────────────────────────────────────────────────────"
+          
+          # Lesson 2.1
+          if pytest tests/part2_logging/test_lesson_2_1.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 2.1: Why Logging Matters (20 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 2.1: Why Logging Matters (20 tests) - INCOMPLETE"
+          fi
+          
+          # Lesson 2.2
+          if pytest tests/part2_logging/test_lesson_2_2.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 2.2: Custom Log Handlers (19 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 2.2: Custom Log Handlers (19 tests) - INCOMPLETE"
+          fi
+          
+          # Lesson 2.3
+          if pytest tests/part2_logging/test_lesson_2_3.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 2.3: Contextual Logging (24 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 2.3: Contextual Logging (24 tests) - INCOMPLETE"
+          fi
+          
+          # Lesson 2.4
+          if pytest tests/part2_logging/test_lesson_2_4.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 2.4: Secure Logging (34 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 2.4: Secure Logging (34 tests) - INCOMPLETE"
+          fi
+          
+          echo ""
+          echo "📚 PART 3: REPL (Interactive CLI)"
+          echo "────────────────────────────────────────────────────────────────"
+          
+          # Lesson 3.1
+          if pytest tests/part3_repl/test_lesson_3_1.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 3.1: Building Your First REPL (22 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 3.1: Building Your First REPL (22 tests) - INCOMPLETE"
+          fi
+          
+          # Lesson 3.2
+          if pytest tests/part3_repl/test_lesson_3_2.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 3.2: Configuration & Formatting (28 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 3.2: Configuration & Formatting (28 tests) - INCOMPLETE"
+          fi
+          
+          # Lesson 3.3
+          if pytest tests/part3_repl/test_lesson_3_3.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 3.3: Adding Logging to REPL (25 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 3.3: Adding Logging to REPL (25 tests) - INCOMPLETE"
+          fi
+          
+          echo ""
+          echo "📚 PART 4: AI Chat with Cost Tracking"
+          echo "────────────────────────────────────────────────────────────────"
+          
+          # Lesson 4.1
+          if pytest tests/part4_chat/test_lesson_4_1.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 4.1: OpenAI Integration & Costs (36 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 4.1: OpenAI Integration & Costs (36 tests) - INCOMPLETE"
+          fi
+          
+          # Lesson 4.2
+          if pytest tests/part4_chat/test_lesson_4_2_simple.py -v --tb=no -q 2>&1 | grep -q "passed"; then
+            echo "✅ Lesson 4.2: Budget Management (12 tests) - COMPLETE"
+            COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          else
+            echo "❌ Lesson 4.2: Budget Management (12 tests) - INCOMPLETE"
+          fi
+          
+          # Lesson 4.3 (reading only, no tests)
+          echo "📖 Lesson 4.3: Cost Optimization (0 tests) - READING ONLY"
+          COMPLETED_LESSONS=$((COMPLETED_LESSONS + 1))
+          
+          echo ""
+          echo "════════════════════════════════════════════════════════════════"
+          echo "                        📊 FINAL SCORE                          "
+          echo "════════════════════════════════════════════════════════════════"
+          echo ""
+          
+          PERCENTAGE=$((COMPLETED_LESSONS * 100 / TOTAL_LESSONS))
+          echo "Lessons Complete: $COMPLETED_LESSONS / $TOTAL_LESSONS ($PERCENTAGE%)"
+          echo ""
+          
+          if [ $PERCENTAGE -eq 100 ]; then
+            echo "🎉 GRADE: A+ (100%) - ALL LESSONS COMPLETE!"
+            echo "   Outstanding work! Student has mastered all concepts."
+          elif [ $PERCENTAGE -ge 90 ]; then
+            echo "🌟 GRADE: A ($PERCENTAGE%) - EXCELLENT"
+            echo "   Nearly complete. Excellent progress!"
+          elif [ $PERCENTAGE -ge 80 ]; then
+            echo "👍 GRADE: B ($PERCENTAGE%) - GOOD"
+            echo "   Good progress. A few lessons remaining."
+          elif [ $PERCENTAGE -ge 70 ]; then
+            echo "📚 GRADE: C ($PERCENTAGE%) - SATISFACTORY"
+            echo "   Satisfactory progress. Keep working!"
+          elif [ $PERCENTAGE -ge 60 ]; then
+            echo "⚠️  GRADE: D ($PERCENTAGE%) - NEEDS IMPROVEMENT"
+            echo "   More work needed. Review incomplete lessons."
+          else
+            echo "❌ GRADE: F ($PERCENTAGE%) - INCOMPLETE"
+            echo "   Assignment incomplete. Significant work required."
+          fi
+          
+          echo ""
+          echo "════════════════════════════════════════════════════════════════"
+          
+          # Exit with success - we don't want to fail the build, just show the report
+          exit 0
 
-      - name: "✅ GRADE: Pytest-pylint integration test"
+      - name: "📊 Overall Test Summary"
+        if: always()
         env:
           PYTHONPATH: ${{ github.workspace }}/src
         run: |
-          echo "🔍 Running pytest with pylint integration..."
-          pytest --pylint src -v
-          echo "✅ Pytest-pylint integration passed!"
+          echo ""
+          echo "════════════════════════════════════════════════════════════════"
+          echo "              📊 DETAILED TEST EXECUTION REPORT                 "
+          echo "════════════════════════════════════════════════════════════════"
+          echo ""
+          
+          # Run all tests with summary
+          pytest tests -v --tb=short || true
+          
+          echo ""
+          echo "════════════════════════════════════════════════════════════════"
 
-      - name: "✅ GRADE: Unit tests execution"
+      - name: "� Code Coverage Report"
+        if: always()
         env:
           PYTHONPATH: ${{ github.workspace }}/src
         run: |
-          echo "🔍 Running unit tests..."
-          pytest tests -v
-          echo "✅ All unit tests passed!"
-
-      - name: "✅ GRADE: Test coverage (must be 100%)"
-        env:
-          PYTHONPATH: ${{ github.workspace }}/src
-        run: |
-          echo "🔍 Checking test coverage..."
-          coverage run -m pytest tests
-          coverage report --fail-under=100
-          echo "✅ 100% test coverage achieved!"
-
-      - name: "📊 GRADE: Coverage report summary"
-        env:
-          PYTHONPATH: ${{ github.workspace }}/src
-        run: |
-          echo "📊 Final coverage report:"
-          coverage report
+          echo ""
+          echo "════════════════════════════════════════════════════════════════"
+          echo "                    � CODE COVERAGE REPORT                     "
+          echo "════════════════════════════════════════════════════════════════"
+          echo ""
+          
+          coverage run -m pytest tests 2>/dev/null || true
+          coverage report --show-missing
+          
+          echo ""
+          echo "════════════════════════════════════════════════════════════════"

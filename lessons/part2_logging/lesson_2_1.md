@@ -3,7 +3,7 @@
 > **Part 2 of 4: Logging & Debugging** | Lesson 1 of 4
 
 ### 🧭 Navigation
-⬅️ [Previous](../part1_configuration/lesson_1_3.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](lesson_2_2.md)
+⬅️ [Previous](../part1_configuration/lesson_1_3.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next](lesson_2_2.md)
 
 ---
 
@@ -499,7 +499,7 @@ Now you can debug production issues without SSH-ing into servers and adding prin
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous](../part1_configuration/lesson_1_3.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](lesson_2_2.md)
+⬅️ [Previous](../part1_configuration/lesson_1_3.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next](lesson_2_2.md)
 
 ---
 

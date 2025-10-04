@@ -11,7 +11,7 @@
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous: Lesson 4.1](lesson_4_1.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.3](lesson_4_3.md)
+⬅️ [Previous: Lesson 4.1](lesson_4_1.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.3](lesson_4_3.md)
 
 ---
 
@@ -30,7 +30,7 @@ By the end of this lesson, you will be able to:
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous: Lesson 4.1](lesson_4_1.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.3](lesson_4_3.md)
+⬅️ [Previous: Lesson 4.1](lesson_4_1.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.3](lesson_4_3.md)
 
 ---
 

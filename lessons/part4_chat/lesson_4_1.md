@@ -11,7 +11,7 @@
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous: Lesson 3.3](../part3_repl/lesson_3_3.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.2](lesson_4_2.md)
+⬅️ [Previous: Lesson 3.3](../part3_repl/lesson_3_3.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.2](lesson_4_2.md)
 
 ---
 
@@ -497,7 +497,7 @@ In this lesson you:
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous: Lesson 3.3](../part3_repl/lesson_3_3.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.2](lesson_4_2.md)
+⬅️ [Previous: Lesson 3.3](../part3_repl/lesson_3_3.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.2](lesson_4_2.md)
 
 ---
 

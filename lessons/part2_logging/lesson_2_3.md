@@ -10,7 +10,7 @@
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous: Lesson 2.2](lesson_2_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.4](lesson_2_4.md)
+⬅️ [Previous: Lesson 2.2](lesson_2_2.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.4](lesson_2_4.md)
 
 ---
 
@@ -461,7 +461,7 @@ Implement the functions to make the tests pass:
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous: Lesson 2.2](lesson_2_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.4](lesson_2_4.md)
+⬅️ [Previous: Lesson 2.2](lesson_2_2.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.4](lesson_2_4.md)
 
 ---
 

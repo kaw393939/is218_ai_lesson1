@@ -2,7 +2,7 @@
 
 > **Learn professional Python development through building real applications**
 
-**Quick Navigation**: [🗺️ Course Index](lessons/INDEX.md) | [🏁 Quick Start](#-quick-start) | [📚 Lessons](#️-learning-path) | [🧪 Testing](#-testing-guide) | [💡 Help](#-troubleshooting)
+**Quick Navigation**: [🏁 Quick Start](#-quick-start) | [📚 All Lessons](#-all-lessons) | [🧪 Testing](#-testing) | [💡 Help](#-troubleshooting)
 
 ---
 
@@ -59,9 +59,7 @@ pytest
 
 ### 🚦 Start Here
 
-**New to the course?** → [Go to Course Index](lessons/INDEX.md) for complete navigation
-
-**Ready to code?** → [Jump to Lesson 1.1](lessons/part1_configuration/lesson_1_1.md) 🚀
+**Ready to begin?** → [Jump to Lesson 1.1: Introduction to Configuration](lessons/part1_configuration/lesson_1_1.md) 🚀
 
 ---
 
@@ -96,179 +94,66 @@ git commit -m "Complete lesson 1.1: basic configuration"
 
 ---
 
-## 🗺️ Learning Path
+## � All Lessons
 
-### Part 1: Configuration Management (3 lessons | 47 tests)
-> Learn to handle environment variables, secrets, and settings safely
+### 📂 Part 1: Configuration Management (3 lessons | 47 tests | ~2 hours)
 
-- **Lesson 1.1**: Basic Configuration (12 tests, 30 min)
-  - Load settings from \`.env\` files
-  - Keep API keys secure
-  - Use \`python-dotenv\`
-  - 📄 \`lessons/part1_configuration/lesson_1_1.md\`
+**Goal**: Learn to handle environment variables, secrets, and settings safely
 
-- **Lesson 1.2**: Type-Safe Configuration (16 tests, 45 min)
-  - Convert strings to int, float, bool, list
-  - Set default values
-  - Use type hints
-  - 📄 \`lessons/part1_configuration/lesson_1_2.md\`
+| Lesson | Tests | Time | What You'll Build |
+|--------|-------|------|-------------------|
+| [**1.1** Introduction to Configuration](lessons/part1_configuration/lesson_1_1.md) | 12 | 30 min | Load settings from `.env` files, keep secrets secure |
+| [**1.2** Type-Safe Configuration](lessons/part1_configuration/lesson_1_2.md) | 16 | 45 min | Convert strings to int/float/bool/list with type safety |
+| [**1.3** Configuration Validation](lessons/part1_configuration/lesson_1_3.md) | 19 | 45 min | Validate ranges, formats, and provide helpful errors |
 
-- **Lesson 1.3**: Configuration Validation (19 tests, 45 min)
-  - Validate ranges and formats
-  - Provide helpful error messages
-  - Prevent invalid configurations
-  - 📄 \`lessons/part1_configuration/lesson_1_3.md\`
-
-**What you build**: \`src/config.py\` with \`Config\`, \`TypedConfig\`, and \`ValidatedConfig\` classes
+**📁 Output**: `src/config.py` (234 lines, 3 classes)
 
 ---
 
-### Part 2: Logging & Debugging (4 lessons | 97 tests)
-> Master professional logging for debugging and production monitoring
+### 📂 Part 2: Logging & Debugging (4 lessons | 97 tests | ~4 hours)
 
-- **Lesson 2.1**: Basic Logging (20 tests, 45 min)
-  - Replace \`print()\` with proper logging
-  - Configure log levels (DEBUG, INFO, WARNING, ERROR)
-  - Format log messages with timestamps
-  - Log exceptions with tracebacks
-  - 📄 \`lessons/part2_logging/lesson_2_1.md\`
+**Goal**: Master professional logging for debugging and production monitoring
 
-- **Lesson 2.2**: Advanced Logging (19 tests, 60 min)
-  - JSON-formatted structured logging
-  - Rotating file handlers (auto-cleanup old logs)
-  - Multiple handlers (console + file)
-  - Different log levels per handler
-  - 📄 \`lessons/part2_logging/lesson_2_2.md\`
+| Lesson | Tests | Time | What You'll Build |
+|--------|-------|------|-------------------|
+| [**2.1** Why Logging Matters](lessons/part2_logging/lesson_2_1.md) | 20 | 45 min | Replace `print()` with proper logging, log levels |
+| [**2.2** Custom Log Handlers](lessons/part2_logging/lesson_2_2.md) | 19 | 60 min | JSON formatter, rotating files, multi-handler setup |
+| [**2.3** Contextual Logging](lessons/part2_logging/lesson_2_3.md) | 24 | 60 min | Request IDs, user tracking, context managers |
+| [**2.4** Secure Logging](lessons/part2_logging/lesson_2_4.md) | 34 | 60 min | Redact credit cards, SSNs, emails, API keys |
 
-- **Lesson 2.3**: Contextual Logging (24 tests, 60 min)
-  - Add request IDs to logs
-  - Track user actions
-  - Context managers for temporary context
-  - Correlation across service calls
-  - 📄 \`lessons/part2_logging/lesson_2_3.md\`
-
-- **Lesson 2.4**: Security & Sensitive Data (34 tests, 60 min)
-  - Redact credit cards, SSNs, emails
-  - Filter sensitive data from logs
-  - Sanitize dictionaries
-  - Mask PII (Personally Identifiable Information)
-  - 📄 \`lessons/part2_logging/lesson_2_4.md\`
-
-**What you build**: \`src/logger.py\` with professional logging utilities
+**📁 Output**: `src/logger.py` (416 lines, professional logging utilities)
 
 ---
 
-### Part 3: REPL (Command-Line Interface) (3 lessons | 75 tests)
-> Build an interactive calculator that users can actually use
+### 📂 Part 3: REPL (Interactive CLI) (3 lessons | 75 tests | ~3 hours)
 
-- **Lesson 3.1**: Basic REPL (22 tests, 60 min)
-  - Read-Eval-Print Loop pattern
-  - Parse user commands
-  - Execute calculator operations (add, subtract, multiply, divide)
-  - Handle errors gracefully
-  - 📄 \`lessons/part3_repl/lesson_3_1.md\`
+**Goal**: Build an interactive calculator that users can actually use
 
-- **Lesson 3.2**: Configuration & Formatting (28 tests, 60 min)
-  - Configurable precision (decimal places)
-  - Max value limits
-  - Custom welcome messages
-  - Help command
-  - 📄 \`lessons/part3_repl/lesson_3_2.md\`
+| Lesson | Tests | Time | What You'll Build |
+|--------|-------|------|-------------------|
+| [**3.1** Building Your First REPL](lessons/part3_repl/lesson_3_1.md) | 22 | 60 min | Command parsing, calculator operations, error handling |
+| [**3.2** Configuration & Formatting](lessons/part3_repl/lesson_3_2.md) | 28 | 60 min | Precision control, max values, help command |
+| [**3.3** Adding Logging to REPL](lessons/part3_repl/lesson_3_3.md) | 25 | 60 min | Session tracking, operation logging, debug mode |
 
-- **Lesson 3.3**: REPL Logging (25 tests, 60 min)
-  - Log every command
-  - Track session IDs
-  - Count operations performed
-  - Debug mode for troubleshooting
-  - 📄 \`lessons/part3_repl/lesson_3_3.md\`
+**📁 Output**: `src/repl.py` (254 lines, working calculator REPL)
 
-**What you build**: \`src/repl.py\` - A professional calculator REPL
-
-**Try it**:
-\`\`\`bash
-python src/repl.py
-
-Calculator REPL v1.0
-
-Available commands:
-  add <num1> <num2>      - Add two numbers
-  subtract <num1> <num2> - Subtract num2 from num1
-  multiply <num1> <num2> - Multiply two numbers
-  divide <num1> <num2>   - Divide num1 by num2
-  help                   - Show this help message
-  exit                   - Exit the calculator
-
-> add 5 3
-Result: 8.0
-
-> multiply 4 7
-Result: 28.0
-
-> exit
-Goodbye!
-\`\`\`
+**🎮 Try it**: `python src/repl.py`
 
 ---
 
-### Part 4: AI Chat with Cost Tracking (3 lessons | 48 tests)
-> Integrate with OpenAI API and build a real AI chatbot
+### 📂 Part 4: AI Chat with Cost Tracking (3 lessons | 48 tests | ~3 hours)
 
-- **Lesson 4.1**: OpenAI Integration & Cost Fundamentals (36 tests, 90 min)
-  - Connect to OpenAI API
-  - Count tokens with tiktoken
-  - Calculate exact costs
-  - Display cost transparency to users
-  - Model pricing (gpt-4o-mini, gpt-4o, o1 series)
-  - 📄 \`lessons/part4_chat/lesson_4_1.md\`
+**Goal**: Integrate with OpenAI API and build a real AI chatbot with transparent cost tracking
 
-- **Lesson 4.2**: Budget Management (12 tests, 60 min)
-  - Session budgets (cost per conversation)
-  - Daily budgets (cost per user per day)
-  - Budget warnings (75%, 90% thresholds)
-  - Persist cost tracking to JSON
-  - Block requests over budget
-  - 📄 \`lessons/part4_chat/lesson_4_2.md\`
+| Lesson | Tests | Time | What You'll Build |
+|--------|-------|------|-------------------|
+| [**4.1** OpenAI Integration & Cost Fundamentals](lessons/part4_chat/lesson_4_1.md) | 36 | 90 min | API integration, token counting, cost calculation |
+| [**4.2** Session Cost Tracking & Budget Management](lessons/part4_chat/lesson_4_2.md) | 12 | 60 min | Session/daily budgets, warnings, cost persistence |
+| [**4.3** Cost Optimization Strategies](lessons/part4_chat/lesson_4_3.md) | 0 | 30 min | Model selection, prompt optimization (reading) |
 
-- **Lesson 4.3**: Cost Optimization Strategies (reading, 30 min)
-  - Choose the right model (60-95% cost savings!)
-  - Reduce max_tokens intelligently
-  - Implement prompt caching
-  - Batch API for 50% savings
-  - System prompts best practices
-  - 📄 \`lessons/part4_chat/lesson_4_3.md\`
+**📁 Output**: `src/chat.py` (552 lines, AI chatbot with cost tracking)
 
-**What you build**: \`src/chat.py\` - An AI chatbot with transparent cost tracking
-
-**Try it** (requires OpenAI API key):
-\`\`\`bash
-# Set your API key
-export OPENAI_API_KEY='sk-proj-...'
-
-# Run the chat
-python src/chat.py
-
-AI Chat REPL - Type 'exit' to quit, 'help' for commands
-
-You: Hello!
-
-[Estimated cost: $0.000300]
-
-AI: Hello! How can I assist you today?
-
-[Tokens: 8 in + 9 out = 17 total]
-[Cost: $0.000007 | Session: $0.000007]
-
-You: exit
-
-Goodbye! Total cost: $0.000007
-\`\`\`
-
-**Real 2024/2025 Pricing**:
-- \`gpt-4o-mini\`: $0.15/$0.60 per 1M tokens (default - cheapest!)
-- \`gpt-4o\`: $2.50/$10.00 per 1M tokens
-- \`o1-mini\`: $1.10/$4.40 per 1M tokens (reasoning)
-- \`o1\`: $15.00/$60.00 per 1M tokens (advanced reasoning)
-- \`o1-pro\`: $150.00/$600.00 per 1M tokens (1000x more expensive!)
+**🤖 Try it**: `python src/chat.py` (requires OpenAI API key)
 
 ---
 

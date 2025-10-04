@@ -3,7 +3,7 @@
 > **Part 3 of 4: REPL (Interactive CLI)** | Lesson 3 of 3
 
 ### 🧭 Navigation
-⬅️ [Previous](lesson_3_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](../part4_chat/lesson_4_1.md)
+⬅️ [Previous](lesson_3_2.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next](../part4_chat/lesson_4_1.md)
 
 ---
 
@@ -14,7 +14,7 @@ Ready? Let's add logging! 📝
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous](lesson_3_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](../part4_chat/lesson_4_1.md)
+⬅️ [Previous](lesson_3_2.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next](../part4_chat/lesson_4_1.md)
 
 ---
 

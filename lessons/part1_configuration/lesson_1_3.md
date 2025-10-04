@@ -3,14 +3,14 @@
 > **Part 1 of 4: Configuration Management** | Lesson 3 of 3
 
 ### 🧭 Navigation
-⬅️ [Previous](lesson_1_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](../part2_logging/lesson_2_1.md)
+⬅️ [Previous](lesson_1_2.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next](../part2_logging/lesson_2_1.md)
 
 ---
 
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous: Lesson 1.2](lesson_1_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.1](../part2_logging/lesson_2_1.md)
+⬅️ [Previous: Lesson 1.2](lesson_1_2.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.1](../part2_logging/lesson_2_1.md)
 
 ---
 
@@ -516,7 +516,7 @@ These skills will serve you throughout your career. Every application needs conf
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous](lesson_1_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](../part2_logging/lesson_2_1.md)
+⬅️ [Previous](lesson_1_2.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next](../part2_logging/lesson_2_1.md)
 
 ---
 

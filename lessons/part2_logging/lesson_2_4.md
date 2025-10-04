@@ -3,7 +3,7 @@
 > **Part 2 of 4: Logging & Debugging** | Lesson 4 of 4
 
 ### 🧭 Navigation
-⬅️ [Previous](lesson_2_3.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](../part3_repl/lesson_3_1.md)
+⬅️ [Previous](lesson_2_3.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next](../part3_repl/lesson_3_1.md)
 
 ---
 
@@ -16,7 +16,7 @@
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous](lesson_2_3.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](../part3_repl/lesson_3_1.md)
+⬅️ [Previous](lesson_2_3.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next](../part3_repl/lesson_3_1.md)
 
 ---
 
