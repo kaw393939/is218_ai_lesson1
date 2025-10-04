@@ -109,10 +109,64 @@
           "cost": 6.75e-06,
           "messages": 1,
           "timestamp": "2025-10-03T22:16:15.170849"
+        },
+        {
+          "session_id": "4639871a",
+          "cost": 4.6649999999999996e-05,
+          "messages": 4,
+          "timestamp": "2025-10-03T22:17:37.099337"
+        },
+        {
+          "session_id": "8c548e59",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:18:47.732848"
+        },
+        {
+          "session_id": "f9b715d2",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:18:47.749898"
+        },
+        {
+          "session_id": "d64278ab",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:18:58.665729"
+        },
+        {
+          "session_id": "f99fd451",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:18:58.682281"
+        },
+        {
+          "session_id": "0b0414c6",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:32:51.225742"
+        },
+        {
+          "session_id": "6b2e652e",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:32:51.241723"
+        },
+        {
+          "session_id": "ebd13391",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:34:26.099605"
+        },
+        {
+          "session_id": "0f9c664a",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:34:26.116208"
         }
       ],
-      "total_cost": 6.0750000000000006e-05,
-      "total_messages": 9
+      "total_cost": 0.00013440000000000001,
+      "total_messages": 17
     }
   }
 }
