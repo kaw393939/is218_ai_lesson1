@@ -1,0 +1,118 @@
+{
+  "default": {
+    "2025-10-03": {
+      "sessions": [
+        {
+          "session_id": "f29f6558",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T21:57:51.054592"
+        },
+        {
+          "session_id": "bb9131aa",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T21:57:51.071395"
+        },
+        {
+          "session_id": "6f0db0e3",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T21:59:14.400466"
+        },
+        {
+          "session_id": "1cf82feb",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T21:59:14.416946"
+        },
+        {
+          "session_id": "520cf7ac",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:03:08.113753"
+        },
+        {
+          "session_id": "767bf8d3",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:03:08.131316"
+        },
+        {
+          "session_id": "bddd0c6b",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:08:44.364725"
+        },
+        {
+          "session_id": "a0e64890",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:08:44.382747"
+        },
+        {
+          "session_id": "2fdeca35",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:11:03.090056"
+        },
+        {
+          "session_id": "214d07ff",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:11:03.106954"
+        },
+        {
+          "session_id": "2e913f45",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:12:29.934754"
+        },
+        {
+          "session_id": "04cb616a",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:12:29.949534"
+        },
+        {
+          "session_id": "b432338e",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:15:31.437815"
+        },
+        {
+          "session_id": "42601d49",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:15:31.457412"
+        },
+        {
+          "session_id": "60a4cc6d",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:15:50.995697"
+        },
+        {
+          "session_id": "a2edf1ce",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:15:51.009977"
+        },
+        {
+          "session_id": "37865f54",
+          "cost": 0.0,
+          "messages": 0,
+          "timestamp": "2025-10-03T22:16:15.154581"
+        },
+        {
+          "session_id": "7f539006",
+          "cost": 6.75e-06,
+          "messages": 1,
+          "timestamp": "2025-10-03T22:16:15.170849"
+        }
+      ],
+      "total_cost": 6.0750000000000006e-05,
+      "total_messages": 9
+    }
+  }
+}

@@ -3,7 +3,7 @@ Tests for Lesson 1.2: Type-Safe Configuration
 
 This lesson teaches you to:
 1. Work with different data types (int, float, bool, list)
-2. Validate configuration values
+2. Use default values for optional configuration values
 3. Handle missing required values
 4. Use type hints for better code
 
@@ -136,27 +136,23 @@ class TestDefaultValues:
 
 
 class TestRequiredValues:
-    """Test handling of required configuration values."""
+    """Test handling of optional configuration values.
     
-    def test_missing_required_value_raises_error(self):
-        """Should raise ValueError when required value is missing.
-        
-        HINT: API_KEY should be required (no default)
-        In __init__, check if it's None and raise ValueError
-        """
+    NOTE: API_KEY is now optional for Part 4 compatibility.
+    Part 4 uses OPENAI_API_KEY instead.
+    """
+    
+    def test_missing_api_key_uses_default(self):
+        """Should use default when API_KEY is missing."""
         os.environ.pop('API_KEY', None)
         
-        with pytest.raises(ValueError) as exc_info:
-            TypedConfig()
+        config = TypedConfig()
         
-        assert 'API_KEY' in str(exc_info.value)
-        assert 'required' in str(exc_info.value).lower()
+        # Should have empty string default
+        assert config.api_key == ''
     
-    def test_required_value_when_present(self):
-        """Should load required value when present.
-        
-        HINT: os.getenv('API_KEY') without default returns None if missing
-        """
+    def test_api_key_when_present(self):
+        """Should load API_KEY when present."""
         os.environ['API_KEY'] = 'sk-test123456789'
         config = TypedConfig()
         assert config.api_key == 'sk-test123456789'

@@ -58,11 +58,9 @@ class TypedConfig:
         # List values
         self.allowed_users: List[str] = self._str_to_list(os.getenv('ALLOWED_USERS', ''))
 
-        # Required values (no default)
-        api_key = os.getenv('API_KEY')
-        if api_key is None:
-            raise ValueError("API_KEY is required")
-        self.api_key: str = api_key
+        # API key (optional - different parts use different keys)
+        # Part 4 uses OPENAI_API_KEY instead
+        self.api_key: str = os.getenv('API_KEY', '')
 
     @staticmethod
     def _str_to_bool(value: str) -> bool:
