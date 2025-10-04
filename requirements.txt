@@ -3,3 +3,6 @@ pytest-cov>=4.0
 pytest-pylint>=0.18
 coverage>=7.0
 pylint>=2.15
+python-dotenv>=1.0
+openai>=1.0
+tiktoken>=0.5
