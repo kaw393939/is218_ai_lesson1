@@ -49,29 +49,33 @@ Tokens are the "units of text" that AI models process:
 OpenAI charges separately for input and output tokens:
 
 ```
-GPT-4 Turbo (as of 2024):
-- Input:  $10.00 per 1M tokens ($0.00001 per token)
-- Output: $30.00 per 1M tokens ($0.00003 per token)
+GPT-4o (as of 2024/2025):
+- Input:  $2.50 per 1M tokens ($0.0000025 per token)
+- Output: $10.00 per 1M tokens ($0.00001 per token)
 
-GPT-3.5 Turbo:
-- Input:  $0.50 per 1M tokens ($0.0000005 per token)
-- Output: $1.50 per 1M tokens ($0.0000015 per token)
+GPT-4o-mini (Budget Option):
+- Input:  $0.15 per 1M tokens ($0.00000015 per token)
+- Output: $0.60 per 1M tokens ($0.0000006 per token)
+
+o1 (Advanced Reasoning):
+- Input:  $15.00 per 1M tokens ($0.000015 per token)
+- Output: $60.00 per 1M tokens ($0.00006 per token)
 ```
 
 **Example calculation**:
 ```
 User sends: "Explain quantum computing" (4 tokens)
-GPT-4 responds: 200 tokens of explanation
+GPT-4o-mini responds: 200 tokens of explanation
 
-Cost = (4 × $0.00001) + (200 × $0.00003)
-     = $0.00004 + $0.006
-     = $0.00604
+Cost = (4 × $0.00000015) + (200 × $0.0000006)
+     = $0.0000006 + $0.00012
+     = $0.0001206
 ```
 
 ### Why This Matters
 
-1. **Costs accumulate**: 1000 conversations/day = $6/day = $180/month
-2. **Model choice matters**: GPT-4 costs ~20x more than GPT-3.5
+1. **Costs accumulate**: 1000 conversations/day @ $0.0001 = $0.10/day = $3/month (gpt-4o-mini)
+2. **Model choice matters**: GPT-4o costs ~17x more than GPT-4o-mini; o1 costs ~100x more
 3. **Long responses cost more**: Asking for detailed explanations increases output tokens
 4. **Context costs**: Including conversation history in each request costs tokens
 
@@ -133,7 +137,7 @@ OpenAI provides `tiktoken` library for accurate token counting:
 ```python
 import tiktoken
 
-def count_tokens(text: str, model: str = "gpt-3.5-turbo") -> int:
+def count_tokens(text: str, model: str = "gpt-4o-mini") -> int:
     """Count tokens in text for given model.
     
     Args:
@@ -159,15 +163,23 @@ def count_tokens(text: str, model: str = "gpt-3.5-turbo") -> int:
 Create pricing constants and helper functions:
 
 ```python
-# Pricing per 1M tokens (as of 2024)
+# Pricing per 1M tokens (as of 2024/2025)
 MODEL_PRICING = {
-    'gpt-4-turbo': {
-        'input': 0.01,    # $10 per 1M tokens
-        'output': 0.03,   # $30 per 1M tokens
+    'gpt-4o-mini': {
+        'input': 0.15,    # $0.15 per 1M tokens
+        'output': 0.60,   # $0.60 per 1M tokens
     },
-    'gpt-3.5-turbo': {
-        'input': 0.0005,  # $0.50 per 1M tokens
-        'output': 0.0015, # $1.50 per 1M tokens
+    'gpt-4o': {
+        'input': 2.50,    # $2.50 per 1M tokens
+        'output': 10.00,  # $10.00 per 1M tokens
+    },
+    'o1-mini': {
+        'input': 1.10,    # $1.10 per 1M tokens
+        'output': 4.40,   # $4.40 per 1M tokens
+    },
+    'o1': {
+        'input': 15.00,   # $15.00 per 1M tokens
+        'output': 60.00,  # $60.00 per 1M tokens
     },
 }
 
@@ -205,7 +217,7 @@ from openai import OpenAI
 client = OpenAI()  # Reads OPENAI_API_KEY from environment
 
 response = client.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model="gpt-4o-mini",
     messages=[
         {"role": "user", "content": "Hello!"}
     ],
@@ -321,7 +333,7 @@ class ChatConfig(TypedConfig):
     @property
     def model(self) -> str:
         """OpenAI model name."""
-        return self.get_str('CHAT_MODEL', 'gpt-3.5-turbo')
+        return self.get_str('CHAT_MODEL', 'gpt-4o-mini')
     
     @property
     def max_tokens(self) -> int:
@@ -338,7 +350,7 @@ class ChatConfig(TypedConfig):
 ```python
 import tiktoken
 
-def count_tokens(text: str, model: str = "gpt-3.5-turbo") -> int:
+def count_tokens(text: str, model: str = "gpt-4o-mini") -> int:
     """Count tokens in text."""
     try:
         encoding = tiktoken.encoding_for_model(model)
@@ -351,8 +363,10 @@ def count_tokens(text: str, model: str = "gpt-3.5-turbo") -> int:
 ### Step 3: Add Cost Calculation
 ```python
 MODEL_PRICING = {
-    'gpt-4-turbo': {'input': 0.01, 'output': 0.03},
-    'gpt-3.5-turbo': {'input': 0.0005, 'output': 0.0015},
+    'gpt-4o-mini': {'input': 0.15, 'output': 0.60},
+    'gpt-4o': {'input': 2.50, 'output': 10.00},
+    'o1-mini': {'input': 1.10, 'output': 4.40},
+    'o1': {'input': 15.00, 'output': 60.00},
 }
 
 def calculate_cost(model: str, input_tokens: int, output_tokens: int) -> float:

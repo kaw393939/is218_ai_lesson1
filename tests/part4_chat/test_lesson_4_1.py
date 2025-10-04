@@ -17,13 +17,13 @@ class TestChatConfiguration:
     def test_default_model(self):
         """Test default model configuration."""
         config = ChatConfig()
-        assert config.model == 'gpt-3.5-turbo'
+        assert config.model == 'gpt-4o-mini'
 
     def test_custom_model(self, monkeypatch):
         """Test custom model from environment."""
-        monkeypatch.setenv('CHAT_MODEL', 'gpt-4-turbo')
+        monkeypatch.setenv('CHAT_MODEL', 'gpt-4o')
         config = ChatConfig()
-        assert config.model == 'gpt-4-turbo'
+        assert config.model == 'gpt-4o'
 
     def test_default_max_tokens(self):
         """Test default max tokens."""
@@ -79,11 +79,11 @@ class TestTokenCounting:
     def test_count_tokens_with_model(self):
         """Test counting tokens with specific model."""
         text = "Hello"
-        tokens_35 = count_tokens(text, model="gpt-3.5-turbo")
-        tokens_4 = count_tokens(text, model="gpt-4-turbo")
+        tokens_mini = count_tokens(text, model="gpt-4o-mini")
+        tokens_4o = count_tokens(text, model="gpt-4o")
         # Different models might have slightly different tokenization
-        assert tokens_35 > 0
-        assert tokens_4 > 0
+        assert tokens_mini > 0
+        assert tokens_4o > 0
 
     def test_count_tokens_special_characters(self):
         """Test counting tokens with special characters."""
@@ -101,27 +101,27 @@ class TestTokenCounting:
 class TestCostCalculation:
     """Test cost calculation functionality."""
 
-    def test_calculate_cost_gpt35(self):
-        """Test cost calculation for GPT-3.5."""
-        cost = calculate_cost('gpt-3.5-turbo', 100, 200)
-        # 100 input tokens at $0.0005/1M = $0.00005
-        # 200 output tokens at $0.0015/1M = $0.0003
-        # Total = $0.00035
-        expected = (100 / 1_000_000 * 0.0005) + (200 / 1_000_000 * 0.0015)
-        assert abs(cost - expected) < 0.000001
+    def test_calculate_cost_gpt4o_mini(self):
+        """Test cost calculation for GPT-4o-mini."""
+        cost = calculate_cost('gpt-4o-mini', 100, 200)
+        # 100 input tokens at $0.15/1M = $0.000015
+        # 200 output tokens at $0.60/1M = $0.00012
+        # Total = $0.000135
+        expected = (100 / 1_000_000 * 0.15) + (200 / 1_000_000 * 0.60)
+        assert abs(cost - expected) < 0.0000001
 
-    def test_calculate_cost_gpt4(self):
-        """Test cost calculation for GPT-4."""
-        cost = calculate_cost('gpt-4-turbo', 100, 200)
-        # 100 input tokens at $0.01/1M = $0.001
-        # 200 output tokens at $0.03/1M = $0.006
-        # Total = $0.007
-        expected = (100 / 1_000_000 * 0.01) + (200 / 1_000_000 * 0.03)
-        assert abs(cost - expected) < 0.000001
+    def test_calculate_cost_gpt4o(self):
+        """Test cost calculation for GPT-4o."""
+        cost = calculate_cost('gpt-4o', 100, 200)
+        # 100 input tokens at $2.50/1M = $0.00025
+        # 200 output tokens at $10.00/1M = $0.002
+        # Total = $0.00225
+        expected = (100 / 1_000_000 * 2.50) + (200 / 1_000_000 * 10.00)
+        assert abs(cost - expected) < 0.0000001
 
     def test_calculate_cost_zero_tokens(self):
         """Test cost calculation with zero tokens."""
-        cost = calculate_cost('gpt-3.5-turbo', 0, 0)
+        cost = calculate_cost('gpt-4o-mini', 0, 0)
         assert cost == 0.0
 
     def test_calculate_cost_unknown_model(self):
@@ -131,8 +131,8 @@ class TestCostCalculation:
 
     def test_model_pricing_has_required_models(self):
         """Test that MODEL_PRICING has required models."""
-        assert 'gpt-3.5-turbo' in MODEL_PRICING
-        assert 'gpt-4-turbo' in MODEL_PRICING
+        assert 'gpt-4o-mini' in MODEL_PRICING
+        assert 'gpt-4o' in MODEL_PRICING
 
     def test_model_pricing_structure(self):
         """Test that pricing has correct structure."""
@@ -158,10 +158,10 @@ class TestChatREPLInitialization:
     @patch('chat.OpenAI')
     def test_initialization_custom_config(self, mock_openai, monkeypatch):
         """Test REPL initializes with custom config."""
-        monkeypatch.setenv('CHAT_MODEL', 'gpt-4-turbo')
+        monkeypatch.setenv('CHAT_MODEL', 'gpt-4o')
         config = ChatConfig()
         repl = ChatREPL(config)
-        assert repl.config.model == 'gpt-4-turbo'
+        assert repl.config.model == 'gpt-4o'
 
     @patch('chat.OpenAI')
     def test_openai_client_created(self, mock_openai):
@@ -216,7 +216,7 @@ class TestChatREPLMessageProcessing:
         
         # Check that message was passed
         assert call_args.kwargs['messages'][0]['content'] == "Hi there"
-        assert call_args.kwargs['model'] == 'gpt-3.5-turbo'
+        assert call_args.kwargs['model'] == 'gpt-4o-mini'
 
     @patch('chat.OpenAI')
     def test_process_message_updates_session_cost(self, mock_openai):
@@ -307,7 +307,7 @@ class TestChatREPLConfiguration:
     @patch('chat.OpenAI')
     def test_uses_configured_model(self, mock_openai, monkeypatch):
         """Test that REPL uses configured model."""
-        monkeypatch.setenv('CHAT_MODEL', 'gpt-4-turbo')
+        monkeypatch.setenv('CHAT_MODEL', 'gpt-4o')
         
         mock_response = Mock()
         mock_response.choices = [Mock()]
@@ -324,7 +324,7 @@ class TestChatREPLConfiguration:
         repl.process_message("Test")
         
         call_args = mock_client.chat.completions.create.call_args
-        assert call_args.kwargs['model'] == 'gpt-4-turbo'
+        assert call_args.kwargs['model'] == 'gpt-4o'
 
     @patch('chat.OpenAI')
     def test_uses_configured_max_tokens(self, mock_openai, monkeypatch):
