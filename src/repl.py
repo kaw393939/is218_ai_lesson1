@@ -1,18 +1,58 @@
 """REPL (Read-Eval-Print Loop) for calculator application."""
 
+from config import TypedConfig
+
+
+class CalculatorConfig(TypedConfig):
+    """Configuration for calculator REPL with sensible defaults."""
+
+    def __init__(self):  # pylint: disable=super-init-not-called
+        """Initialize calculator configuration.
+        
+        Note: We override parent __init__ because we don't need API_KEY
+        for the calculator. We only inherit the helper methods (get_int, etc).
+        """
+        # Don't call super().__init__() because TypedConfig requires API_KEY
+
+    @property
+    def precision(self) -> int:
+        """Number of decimal places to display."""
+        return self.get_int('REPL_PRECISION', 2)
+
+    @property
+    def max_value(self) -> float:
+        """Maximum allowed value for operations."""
+        return self.get_float('REPL_MAX_VALUE', 1000000.0)
+
+    @property
+    def welcome_message(self) -> str:
+        """Welcome message shown on startup."""
+        return self.get_str('REPL_WELCOME_MESSAGE', 'Calculator REPL v1.0')
+
+    @property
+    def show_help(self) -> bool:
+        """Whether to show help on startup."""
+        return self.get_bool('REPL_SHOW_HELP', True)
+
 
 class CalculatorREPL:
     """Interactive calculator REPL."""
 
-    def __init__(self):
-        """Initialize the calculator REPL."""
+    def __init__(self, config: CalculatorConfig | None = None):
+        """Initialize the calculator REPL.
+
+        Args:
+            config: Optional configuration object. If None, creates default config.
+        """
         self.running = False
+        self.config = config or CalculatorConfig()
 
     def start(self):
         """Start the REPL."""
         self.running = True
-        print("Calculator REPL")
-        print("Available commands: add, subtract, multiply, divide, exit")
+        print(self.config.welcome_message)
+        if self.config.show_help:
+            self._print_help()
         print()
 
         while self.running:
@@ -26,6 +66,18 @@ class CalculatorREPL:
                 # Handle Ctrl+D gracefully
                 print("\nGoodbye!")
                 break
+
+    def _print_help(self):
+        """Print available commands and current settings."""
+        print("\nAvailable commands:")
+        print("  add <num1> <num2>      - Add two numbers")
+        print("  subtract <num1> <num2> - Subtract num2 from num1")
+        print("  multiply <num1> <num2> - Multiply two numbers")
+        print("  divide <num1> <num2>   - Divide num1 by num2")
+        print("  help                   - Show this help message")
+        print("  exit                   - Exit the calculator")
+        print(f"\nPrecision: {self.config.precision} decimal places")
+        print(f"Max value: {self.config.max_value}")
 
     def process_command(self, user_input: str):
         """Process a user command.
@@ -46,6 +98,11 @@ class CalculatorREPL:
         if command == 'exit':
             print("Goodbye!")
             self.running = False
+            return
+
+        # Handle help
+        if command == 'help':
+            self._print_help()
             return
 
         # Execute command
@@ -89,17 +146,26 @@ class CalculatorREPL:
 
         # Execute the operation
         if command == 'add':
-            return num1 + num2
-        if command == 'subtract':
-            return num1 - num2
-        if command == 'multiply':
-            return num1 * num2
-        if command == 'divide':
+            result = num1 + num2
+        elif command == 'subtract':
+            result = num1 - num2
+        elif command == 'multiply':
+            result = num1 * num2
+        elif command == 'divide':
             if num2 == 0:
                 raise ZeroDivisionError()
-            return num1 / num2
+            result = num1 / num2
+        else:
+            raise ValueError(f"Unknown command: {command}")
 
-        raise ValueError(f"Unknown command: {command}")
+        # Check max value limit
+        if abs(result) > self.config.max_value:
+            raise ValueError(
+                f"Result exceeds maximum value: {self.config.max_value}"
+            )
+
+        # Format with configured precision
+        return round(result, self.config.precision)
 
 
 def main():
