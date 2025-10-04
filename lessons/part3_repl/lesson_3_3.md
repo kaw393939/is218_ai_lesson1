@@ -7,7 +7,6 @@
 
 ---
 
----
 
 Ready? Let's add logging! 📝
 
