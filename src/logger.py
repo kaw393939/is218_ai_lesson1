@@ -5,6 +5,9 @@ consistent configuration across the application.
 """
 import json
 import logging
+import uuid
+from contextlib import contextmanager
+from logging import LoggerAdapter
 from logging.handlers import RotatingFileHandler
 from typing import Optional
 
@@ -165,3 +168,106 @@ def setup_multi_handler_logging(
     # Add handlers to root logger
     root_logger.addHandler(console_handler)
     root_logger.addHandler(file_handler)
+
+
+def get_contextual_logger(
+    logger: logging.Logger,
+    request_id: Optional[str] = None
+) -> LoggerAdapter:
+    """Get a logger with request context.
+
+    Args:
+        logger: Base logger
+        request_id: Optional request ID (generates one if not provided)
+
+    Returns:
+        LoggerAdapter with request context
+
+    Example:
+        logger = get_contextual_logger(logging.getLogger(__name__), request_id='abc-123')
+        logger.info('Processing request')  # Automatically includes request_id
+    """
+    if request_id is None:
+        request_id = str(uuid.uuid4())
+
+    return LoggerAdapter(logger, {'request_id': request_id})
+
+
+def get_user_logger(
+    logger: logging.Logger,
+    user_id: str,
+    username: Optional[str] = None
+) -> LoggerAdapter:
+    """Get a logger with user context.
+
+    Args:
+        logger: Base logger
+        user_id: User ID
+        username: Optional username
+
+    Returns:
+        LoggerAdapter with user context
+
+    Example:
+        logger = get_user_logger(logging.getLogger(__name__), 'user123', 'alice')
+        logger.info('User action')  # Includes user_id and username
+    """
+    context = {'user_id': user_id}
+    if username:
+        context['username'] = username
+
+    return LoggerAdapter(logger, context)
+
+
+def get_logger_with_context(logger: logging.Logger, **context) -> LoggerAdapter:
+    """Get a logger with arbitrary context.
+
+    Args:
+        logger: Base logger
+        **context: Arbitrary context key-value pairs
+
+    Returns:
+        LoggerAdapter with provided context
+
+    Example:
+        logger = get_logger_with_context(
+            logging.getLogger(__name__),
+            request_id='abc-123',
+            user_id='user456',
+            endpoint='/api/data'
+        )
+        logger.info('Request')  # Includes all context
+    """
+    return LoggerAdapter(logger, context)
+
+
+@contextmanager
+def log_context(logger: logging.Logger, **context):
+    """Context manager that adds context to logger.
+
+    Args:
+        logger: Base logger or adapter
+        **context: Context to add
+
+    Yields:
+        LoggerAdapter with context
+
+    Example:
+        with log_context(logger, request_id='abc-123') as log:
+            log.info('Processing')  # Automatically includes request_id
+    """
+    # If logger is already an adapter, merge contexts
+    if isinstance(logger, LoggerAdapter):
+        merged_context = {**logger.extra, **context}
+        context_logger = LoggerAdapter(logger.logger, merged_context)
+    else:
+        context_logger = LoggerAdapter(logger, context)
+
+    # Log entry
+    context_logger.debug('Entering context')
+
+    try:
+        yield context_logger
+    finally:
+        # Log exit
+        context_logger.debug('Exiting context')
