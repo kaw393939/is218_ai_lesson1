@@ -25,18 +25,9 @@ By the end of this lesson, you will be able to:
 4. Persist cost data to files for historical analysis
 5. Enforce budget limits to prevent runaway spending
 6. Generate cost reports and analytics
-7. - ✅ Used logging as an audit and monitoring tool
+7. Use logging as an audit and monitoring tool
 
 ---
-
-### 🧭 Navigation
-⬅️ [Previous: Lesson 4.1](lesson_4_1.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.3](lesson_4_3.md)
-
----
-
-**Lesson 4.2 Complete!** When all tests pass, continue to [Lesson 4.3: Cost Optimization Strategies →](lesson_4_3.md)
-
-```
 
 ## The Story: The Budget Violation
 
@@ -609,3 +600,11 @@ In this lesson you:
 - [Structured Logging Best Practices](https://www.structlog.org/)
 - [Cost Management Patterns](https://aws.amazon.com/blogs/architecture/cost-management-patterns/)
 - [OpenAI Usage Tracking](https://platform.openai.com/docs/guides/production-best-practices/tracking-usage)
+---
+
+### 🧭 Navigation
+⬅️ [Previous: Lesson 4.1](lesson_4_1.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.3](lesson_4_3.md)
+
+---
+
+**Lesson 4.2 Complete!** ✅ When all 12 tests pass, continue to [Lesson 4.3: Cost Optimization Strategies →](lesson_4_3.md)

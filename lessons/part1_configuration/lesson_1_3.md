@@ -9,11 +9,6 @@
 
 ---
 
-### 🧭 Navigation
-⬅️ [Previous: Lesson 1.2](lesson_1_2.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.1](../part2_logging/lesson_2_1.md)
-
----
-
 ## 🎮 Your Mission
 
 You're going to add validation to your configuration system to catch bad values before they cause problems. By the end, you'll understand why "fail fast" is a crucial principle in software engineering.
@@ -512,12 +507,11 @@ These skills will serve you throughout your career. Every application needs conf
 
 
 ```
-
 ---
 
 ### 🧭 Navigation
-⬅️ [Previous](lesson_1_2.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next](../part2_logging/lesson_2_1.md)
+⬅️ [Previous: Lesson 1.2](lesson_1_2.md) | 🏠 [All Lessons](../../README.md#-all-lessons) | 📖 [README](../../README.md) | ➡️ [Next: Part 2, Lesson 2.1](../part2_logging/lesson_2_1.md)
 
 ---
 
-**Part Complete!** 🎉 Take a break, then continue to [Next Part →](../part2_logging/lesson_2_1.md)
+**Part 1 Complete!** 🎉 When all 19 tests pass, take a break then continue to [Part 2: Lesson 2.1 - Why Logging Matters →](../part2_logging/lesson_2_1.md)
