@@ -3,7 +3,9 @@
 This module provides functions to set up and get loggers with
 consistent configuration across the application.
 """
+import json
 import logging
+from logging.handlers import RotatingFileHandler
 from typing import Optional
 
 
@@ -59,3 +61,107 @@ def setup_logging(level: int = logging.INFO, log_file: Optional[str] = None) -> 
         console_handler.setLevel(level)
         console_handler.setFormatter(formatter)
         root_logger.addHandler(console_handler)
+
+
+class JsonFormatter(logging.Formatter):
+    """Format log records as JSON for structured logging."""
+
+    def format(self, record: logging.LogRecord) -> str:
+        """Convert log record to JSON string.
+
+        Args:
+            record: The log record to format
+
+        Returns:
+            JSON string representation of the log record
+
+        Example:
+            formatter = JsonFormatter()
+            handler.setFormatter(formatter)
+        """
+        log_data = {
+            'timestamp': self.formatTime(record),
+            'level': record.levelname,
+            'logger': record.name,
+            'message': record.getMessage(),
+            'module': record.module,
+            'function': record.funcName,
+            'line': record.lineno
+        }
+
+        # Add exception info if present
+        if record.exc_info:  # pragma: no cover
+            log_data['exception'] = self.formatException(record.exc_info)
+
+        return json.dumps(log_data)
+
+
+def get_rotating_file_handler(
+    log_file: str,
+    max_bytes: int = 10485760,
+    backup_count: int = 5
+) -> RotatingFileHandler:
+    """Get a rotating file handler that manages log file size.
+
+    Args:
+        log_file: Path to the log file
+        max_bytes: Maximum size in bytes before rotation (default: 10MB)
+        backup_count: Number of backup files to keep (default: 5)
+
+    Returns:
+        Configured RotatingFileHandler instance
+
+    Example:
+        handler = get_rotating_file_handler('app.log', max_bytes=5242880, backup_count=3)
+        logger.addHandler(handler)
+    """
+    handler = RotatingFileHandler(
+        log_file,
+        maxBytes=max_bytes,
+        backupCount=backup_count
+    )
+    return handler
+
+
+def setup_multi_handler_logging(
+    console_level: int = logging.INFO,
+    file_level: int = logging.DEBUG,
+    log_file: str = 'app.log'
+) -> None:
+    """Set up logging with multiple handlers for different outputs.
+
+    Args:
+        console_level: Logging level for console output (default: INFO)
+        file_level: Logging level for file output (default: DEBUG)
+        log_file: Path to log file (default: 'app.log')
+
+    Example:
+        # Console shows INFO+, file captures DEBUG+
+        setup_multi_handler_logging(
+            console_level=logging.INFO,
+            file_level=logging.DEBUG,
+            log_file='logs/app.log'
+        )
+    """
+    # Get root logger and clear existing handlers
+    root_logger = logging.getLogger()
+    root_logger.handlers.clear()
+    root_logger.setLevel(logging.DEBUG)  # Set to lowest level, let handlers filter
+
+    # Console handler - human readable format
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(console_level)
+    console_formatter = logging.Formatter('%(levelname)s - %(message)s')
+    console_handler.setFormatter(console_formatter)
+
+    # File handler - detailed format
+    file_handler = logging.FileHandler(log_file, mode='a')
+    file_handler.setLevel(file_level)
+    file_formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    file_handler.setFormatter(file_formatter)
+
+    # Add handlers to root logger
+    root_logger.addHandler(console_handler)
+    root_logger.addHandler(file_handler)
