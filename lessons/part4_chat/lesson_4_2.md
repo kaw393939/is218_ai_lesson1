@@ -1,10 +1,19 @@
 # Lesson 4.2: Session Cost Tracking & Budget Management
 
-**Course**: IS 218 - Building AI Systems  
-**Part**: 4 - Cost-Aware AI Chat Application  
-**Lesson**: 4.2 - Budget Controls & Logging  
-**Difficulty**: ⭐⭐⭐⭐☆  
-**Time**: 60 minutes
+> **Part 4 of 4: AI Chat with Cost Tracking** | Lesson 2 of 3
+
+**⏱️ Time**: 60 minutes  
+**🎯 Goal**: Make all 12 tests pass!  
+**📁 File**: `src/chat.py` (add CostTracker class)  
+**📦 Builds On**: Lesson 4.1 (ChatREPL basics)  
+**Difficulty**: ⭐⭐⭐⭐☆
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous: Lesson 4.1](lesson_4_1.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.3](lesson_4_3.md)
+
+---
 
 ## Learning Objectives
 
@@ -16,7 +25,18 @@ By the end of this lesson, you will be able to:
 4. Persist cost data to files for historical analysis
 5. Enforce budget limits to prevent runaway spending
 6. Generate cost reports and analytics
-7. Use logging as a cost monitoring and audit tool
+7. - ✅ Used logging as an audit and monitoring tool
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous: Lesson 4.1](lesson_4_1.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.3](lesson_4_3.md)
+
+---
+
+**Lesson 4.2 Complete!** When all tests pass, continue to [Lesson 4.3: Cost Optimization Strategies →](lesson_4_3.md)
+
+```
 
 ## The Story: The Budget Violation
 

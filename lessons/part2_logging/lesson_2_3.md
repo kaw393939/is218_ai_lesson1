@@ -1,7 +1,18 @@
 # Lesson 2.3: Contextual Logging with Adapters
 
-**Duration:** 45 minutes  
-**Prerequisites:** Lesson 2.1 (Basic Logging), Lesson 2.2 (Custom Handlers)
+> **Part 2 of 4: Logging & Debugging** | Lesson 3 of 4
+
+**⏱️ Time**: 60 minutes  
+**🎯 Goal**: Make all 24 tests pass!  
+**📁 File**: `src/logger.py` (add contextual logging)  
+**📦 Builds On**: Lessons 2.1-2.2 (Basic Logging + Custom Handlers)
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous: Lesson 2.2](lesson_2_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.4](lesson_2_4.md)
+
+---
 
 ## Learning Objectives
 
@@ -446,6 +457,15 @@ Next lesson: We'll add **secure logging** (redacting sensitive data like passwor
 Implement the functions to make the tests pass:
 1. `get_contextual_logger()` - Returns LoggerAdapter with request_id
 2. `get_user_logger()` - Returns LoggerAdapter with user context
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous: Lesson 2.2](lesson_2_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.4](lesson_2_4.md)
+
+---
+
+**Lesson 2.3 Complete!** When all tests pass, continue to [Lesson 2.4: Secure Logging →](lesson_2_4.md)
 3. `get_logger_with_context()` - Returns LoggerAdapter with arbitrary context
 4. `log_context()` - Context manager that yields LoggerAdapter
 

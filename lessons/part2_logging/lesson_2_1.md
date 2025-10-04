@@ -1,8 +1,11 @@
 # Lesson 2.1: Why Logging Matters
 
-**⏱️ Time**: 45 minutes  
-**🎯 Goal**: Make all 22 tests pass!  
-**📦 Builds On**: Part 1 (Configuration)
+> **Part 2 of 4: Logging & Debugging** | Lesson 1 of 4
+
+### 🧭 Navigation
+⬅️ [Previous](../part1_configuration/lesson_1_3.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](lesson_2_2.md)
+
+---
 
 ---
 
@@ -483,10 +486,6 @@ logging.basicConfig()  # Console only
 
 ---
 
-**Next**: [Lesson 2.2 - Structured Logging →](lesson_2_2.md)
-
----
-
 ## 🎊 Great Job!
 
 You now understand why logging is essential! Every professional Python application uses logging. You've taken a big step toward writing production-ready code! 🎯
@@ -496,3 +495,12 @@ You now understand why logging is essential! Every professional Python applicati
 - logging is for debugging and monitoring your application
 
 Now you can debug production issues without SSH-ing into servers and adding print statements! 🚀
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous](../part1_configuration/lesson_1_3.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](lesson_2_2.md)
+
+---
+
+**Lesson Complete!** When all tests pass, continue to [Next Lesson →](lesson_2_2.md)

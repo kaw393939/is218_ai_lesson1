@@ -1,7 +1,18 @@
 # Lesson 2.2: Custom Log Handlers and Formatters
 
-**Duration:** 45 minutes  
-**Prerequisites:** Lesson 2.1 (Basic Logging)
+> **Part 2 of 4: Logging & Debugging** | Lesson 2 of 4
+
+**⏱️ Time**: 60 minutes  
+**🎯 Goal**: Make all 19 tests pass!  
+**📁 File**: `src/logger.py` (add JsonFormatter, rotating handlers)  
+**📦 Builds On**: Lesson 2.1 (Basic Logging)
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous: Lesson 2.1](lesson_2_1.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.3](lesson_2_3.md)
+
+---
 
 ## Learning Objectives
 
@@ -299,6 +310,15 @@ Next lesson: We'll add **contextual logging** (request IDs, user info, etc.)
 
 Implement the functions to make the tests pass:
 1. `JsonFormatter` - Custom formatter that outputs JSON
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous: Lesson 2.1](lesson_2_1.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.3](lesson_2_3.md)
+
+---
+
+**Lesson 2.2 Complete!** When all tests pass, continue to [Lesson 2.3: Contextual Logging →](lesson_2_3.md)
 2. `get_rotating_file_handler()` - Returns a RotatingFileHandler
 3. `setup_multi_handler_logging()` - Sets up multiple handlers with different formatters
 

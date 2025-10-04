@@ -1,10 +1,19 @@
 # Lesson 4.1: Chat REPL with API Integration & Cost Fundamentals
 
-**Course**: IS 218 - Building AI Systems  
-**Part**: 4 - Cost-Aware AI Chat Application  
-**Lesson**: 4.1 - Foundation & Cost Awareness  
-**Difficulty**: ⭐⭐⭐☆☆  
-**Time**: 60 minutes
+> **Part 4 of 4: AI Chat with Cost Tracking** | Lesson 1 of 3
+
+**⏱️ Time**: 90 minutes  
+**🎯 Goal**: Make all 36 tests pass!  
+**📁 File**: `src/chat.py` (create ChatREPL, ChatConfig)  
+**📦 Builds On**: Parts 1-3 (Config, Logging, REPL)  
+**Difficulty**: ⭐⭐⭐☆☆
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous: Lesson 3.3](../part3_repl/lesson_3_3.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.2](lesson_4_2.md)
+
+---
 
 ## Learning Objectives
 
@@ -484,6 +493,15 @@ In this lesson you:
 - ✅ Tracked session costs and message counts
 
 **Next lesson**: Session cost tracking, budget management, and comprehensive logging.
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous: Lesson 3.3](../part3_repl/lesson_3_3.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 4.2](lesson_4_2.md)
+
+---
+
+**Lesson 4.1 Complete!** When all tests pass, continue to [Lesson 4.2: Session Cost Tracking →](lesson_4_2.md)
 
 ## Additional Resources
 

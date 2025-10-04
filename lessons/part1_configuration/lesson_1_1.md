@@ -1,7 +1,16 @@
 # Lesson 1.1: Introduction to Configuration Management
 
-**⏱️ Time**: 30 minutes  
-**🎯 Goal**: Make all 12 tests pass!
+> **Part 1 of 4: Configuration Management** | Lesson 1 of 3
+
+### 🧭 Navigation
+🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](lesson_1_2.md)
+
+---
+
+---
+
+### 🧭 Navigation
+🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 1.2](lesson_1_2.md)
 
 ---
 
@@ -268,10 +277,6 @@ self.debug_mode = os.getenv('DEBUG_MODE', 'false').lower() == 'true'
 
 ---
 
-**Next**: [Lesson 1.2 - Python-dotenv Deep Dive →](lesson_1_2_dotenv_deep_dive.md)
-
----
-
 ## 💡 Pro Tips
 
 1. **Never commit .env files** - Add to .gitignore immediately
@@ -281,3 +286,15 @@ self.debug_mode = os.getenv('DEBUG_MODE', 'false').lower() == 'true'
 5. **Test your config** - We just did this! 
 
 Good luck! 🎯
+
+
+````
+
+---
+
+### 🧭 Navigation
+🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](lesson_1_2.md)
+
+---
+
+**Lesson Complete!** When all tests pass, continue to [Next Lesson →](lesson_1_2.md)

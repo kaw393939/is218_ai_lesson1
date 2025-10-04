@@ -2,6 +2,8 @@
 
 > **Learn professional Python development through building real applications**
 
+**Quick Navigation**: [🗺️ Course Index](lessons/INDEX.md) | [🏁 Quick Start](#-quick-start) | [📚 Lessons](#️-learning-path) | [🧪 Testing](#-testing-guide) | [💡 Help](#-troubleshooting)
+
 ---
 
 ## 🎯 What You're Building
@@ -53,7 +55,13 @@ pytest
 # ✅ 279 passed in 1.01s
 \`\`\`
 
-**✨ You're ready! Now start Lesson 1.1 below.**
+**✨ You're ready!**
+
+### 🚦 Start Here
+
+**New to the course?** → [Go to Course Index](lessons/INDEX.md) for complete navigation
+
+**Ready to code?** → [Jump to Lesson 1.1](lessons/part1_configuration/lesson_1_1.md) 🚀
 
 ---
 

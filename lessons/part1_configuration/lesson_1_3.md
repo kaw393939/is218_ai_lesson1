@@ -1,8 +1,16 @@
 # Lesson 1.3: Configuration Validation
 
-**⏱️ Time**: 45 minutes  
-**🎯 Goal**: Make all 22 tests pass!  
-**📦 Builds On**: Lessons 1.1 & 1.2 (Config + TypedConfig)
+> **Part 1 of 4: Configuration Management** | Lesson 3 of 3
+
+### 🧭 Navigation
+⬅️ [Previous](lesson_1_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](../part2_logging/lesson_2_1.md)
+
+---
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous: Lesson 1.2](lesson_1_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next: Lesson 2.1](../part2_logging/lesson_2_1.md)
 
 ---
 
@@ -492,10 +500,6 @@ os.environ.update({
 
 ---
 
-**Next**: [Lesson 2.1 - Why Logging Matters →](../part2_logging/lesson_2_1.md)
-
----
-
 ## 🎊 Congratulations!
 
 You've completed **Part 1: Configuration**! You now know how to:
@@ -506,4 +510,14 @@ You've completed **Part 1: Configuration**! You now know how to:
 
 These skills will serve you throughout your career. Every application needs configuration, and you now know how to do it right! 🎯
 
-**Part 1 Complete!** Take a break, then move on to Part 2: Logging! 🚀
+
+```
+
+---
+
+### 🧭 Navigation
+⬅️ [Previous](lesson_1_2.md) | 🏠 [Course Index](../INDEX.md) | 📖 [README](../../README.md) | ➡️ [Next](../part2_logging/lesson_2_1.md)
+
+---
+
+**Part Complete!** 🎉 Take a break, then continue to [Next Part →](../part2_logging/lesson_2_1.md)
